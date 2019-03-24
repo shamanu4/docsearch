@@ -1,0 +1,9 @@
+.features {
+  background-color: #fbfbfb;
+  padding-top: 86px;
+  padding-bottom: 82px;
+}
+
+.container {
+  @extend %container;
+}

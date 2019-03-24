@@ -1,0 +1,16 @@
+:global {
+  body {
+    overflow-x: auto;
+    min-width: $site-min-width;
+  }
+
+  label {
+    margin-bottom: 0;
+  }
+
+  ul {
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 0;
+  }
+}
