@@ -2,7 +2,8 @@ import {
   FETCH_DOCUMENT_REQUEST,
   CLEAR_DOCUMENT_REQUEST,
   NEW_DOCUMENT_REQUEST,
-  FETCH_SEARCH_RESULTS_REQUEST
+  FETCH_SEARCH_RESULTS_REQUEST,
+  CLEAR_SEARCH_RESULTS_REQUEST
 } from "./constants";
 
 export function fetchDocument(match, location) {
@@ -29,5 +30,11 @@ export function fetchSearchResults(sentenceId) {
   return {
     type: FETCH_SEARCH_RESULTS_REQUEST,
     payload: { sentenceId }
+  };
+}
+
+export function clearSearch() {
+  return {
+    type: CLEAR_SEARCH_RESULTS_REQUEST
   };
 }

@@ -4,7 +4,8 @@ import {
   FETCH_DOCUMENT_FAILURE,
   CLEAR_DOCUMENT_REQUEST,
   FETCH_SEARCH_RESULTS_SUCCESS,
-  FETCH_SEARCH_RESULTS_FAILURE
+  FETCH_SEARCH_RESULTS_FAILURE,
+  CLEAR_SEARCH_RESULTS_REQUEST
 } from "./constants";
 
 export const initialState = fromJS({
@@ -29,8 +30,9 @@ export default function(state = initialState, action) {
       return state.set("document", initialState.get("document"));
     case FETCH_SEARCH_RESULTS_SUCCESS:
       return state.set("search", fromJS(payload));
+    case CLEAR_SEARCH_RESULTS_REQUEST:
     case FETCH_SEARCH_RESULTS_FAILURE:
-      return state.set("search", initialState.get("document"));
+      return state.set("search", initialState.get("search"));
     default:
       return state;
   }

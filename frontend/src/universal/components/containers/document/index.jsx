@@ -7,7 +7,8 @@ import { withRouter } from "react-router-dom";
 import {
   fetchDocument,
   clearDocument,
-  fetchSearchResults
+  fetchSearchResults,
+  clearSearch
 } from "store/document/actions";
 import { getDocument, getSearchResults } from "store/document/selectors";
 import Preloader from "components/common/preloader";
@@ -29,7 +30,8 @@ const defaultProps = {};
       dispatch(fetchDocument(match, location)),
     clearDocumentAction: () => dispatch(clearDocument()),
     fetchSearchResultsAction: sentenceId =>
-      dispatch(fetchSearchResults(sentenceId))
+      dispatch(fetchSearchResults(sentenceId)),
+    clearSearchAction: () => dispatch(clearSearch())
   })
 )
 export default class Document extends React.Component {
@@ -45,6 +47,8 @@ export default class Document extends React.Component {
 
   componentWillUnmount() {
     this.props.clearDocumentAction();
+    this.props.clearSearchAction();
+    console.log("clear");
   }
 
   handleSentenceSelect(sentenceId) {
