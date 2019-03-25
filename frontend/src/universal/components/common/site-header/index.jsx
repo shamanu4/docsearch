@@ -3,6 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Logo from "assets/img/icons/python.svg";
+import NewDocument from "assets/img/icons/new-file.svg";
 
 const propTypes = {};
 
@@ -16,8 +17,14 @@ export default function Header(props) {
           <Link to="/" className={styles.logo}>
             <Logo className={styles.logoSvg} />
           </Link>
+          <div className={styles.title}>{props.title}</div>
         </div>
-        <div className={styles.right}>...</div>
+        <div className={styles.right}>
+          <Link to="/new" className={styles.link}>
+            <NewDocument className={styles.newDocumentSvg} />
+            New Document
+          </Link>
+        </div>
       </div>
     </header>
   );

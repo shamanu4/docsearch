@@ -33,3 +33,39 @@
     height: 42px !important;
   }
 }
+
+.new-document-svg {
+  width: 20px !important;
+  height: 20px !important;
+  margin-right: 4px;
+}
+
+.title {
+  font-size: 20px;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  font-weight: 300;
+  display: block;
+  color: #424242;
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  fill: $black;
+  text-transform: uppercase;
+  font-weight: 300;
+  display: block;
+  color: #424242;
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+  padding: 8px 8px 8px 8px;
+
+  &:hover {
+    text-decoration: none;
+    color: $lightblue;
+    fill: $lightblue;
+    border-color: $lightblue;
+  }
+}
