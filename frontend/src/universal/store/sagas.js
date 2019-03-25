@@ -1,12 +1,26 @@
 import { all } from "redux-saga/effects";
 import { isServer } from "utils/helpers";
+import {
+  fetchDocumentsSaga,
+  watchFetchDocumentsSaga
+} from "store/documents/sagas";
+import {
+  fetchDocumentSaga,
+  watchFetchDocumentSaga,
+  newDocumentSaga
+} from "store/document/sagas";
 
 // This saga is meant to initialize stuff that's very common and assumed to always exist.
 // I.e. it's used when just doesn't make sense to add dispatch in every Component's constructor.
 function* initSaga(route) {
   if (isServer) {
     switch (true) {
-      // Run required sagas on the server side
+      case /^\/documents\/\d?$/g.test(route):
+        yield all([fetchDocumentsSaga()]);
+        break;
+      case /^\/document\/\d+$/g.test(route):
+        yield all([fetchDocumentSaga()]);
+        break;
       default:
     }
   }
@@ -14,6 +28,9 @@ function* initSaga(route) {
 
 export function* rootSaga(route) {
   yield all([
+    watchFetchDocumentsSaga(),
+    watchFetchDocumentSaga(),
+    newDocumentSaga(),
     initSaga(route) // must be the last entry
   ]);
 }
