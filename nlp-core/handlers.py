@@ -69,8 +69,10 @@ async def documents(request):
         async with connection.transaction():
             sql = "SELECT COUNT(id) FROM document;"
             total = await connection.fetchval(sql)
-        if total <= page * per_page:
-            page = max(1, int((total - 1) / per_page))
+
+        last_page = int((total - 1) / per_page) + 1
+        page = min(page, last_page)
+
         async with connection.transaction():
             sql = """
               SELECT 
@@ -83,12 +85,12 @@ async def documents(request):
               WHERE s.ordering = 0
               LIMIT $1 OFFSET $2
             """
-            res = await connection.fetch(sql, per_page, page * per_page)
+            res = await connection.fetch(sql, per_page, (page - 1) * per_page)
 
     return web.json_response({
         "success": True,
         "page": page,
-        "per_page": per_page,
+        "last_page": last_page,
         "total": total,
         "documents": [dict(item) for item in res]
     })
