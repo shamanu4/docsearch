@@ -48,7 +48,6 @@ export default class Document extends React.Component {
   componentWillUnmount() {
     this.props.clearDocumentAction();
     this.props.clearSearchAction();
-    console.log("clear");
   }
 
   handleSentenceSelect(sentenceId) {

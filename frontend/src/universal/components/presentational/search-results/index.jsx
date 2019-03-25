@@ -17,7 +17,7 @@ export default function SearchResults(props) {
       );
     });
   };
-  console.log(props.search);
+
   return (
     <div className={styles.searchResults}>
       <p className={styles.header}>Search results:</p>
