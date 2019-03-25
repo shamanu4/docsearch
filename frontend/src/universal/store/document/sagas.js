@@ -1,4 +1,5 @@
 import { call, put, take, takeLatest } from "redux-saga/effects";
+import { push } from "react-router-redux";
 import {
   FETCH_DOCUMENT_REQUEST,
   FETCH_DOCUMENT_SUCCESS,
@@ -57,6 +58,7 @@ export function* newDocumentSaga() {
           payload: result.data,
           headers: result.headers
         });
+        yield put(push(`/document/${result.data.document_id}/`));
       } else {
         throw result.data;
       }
