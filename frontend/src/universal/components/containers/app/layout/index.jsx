@@ -11,7 +11,7 @@ const defaultProps = {};
 export default function Layout(props) {
   return (
     <div className={styles.wrapper}>
-      <Header />
+      <Header title={props.title} />
       <main className={styles.app}>{props.children}</main>
       <Footer />
     </div>

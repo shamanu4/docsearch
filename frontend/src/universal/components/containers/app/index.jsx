@@ -2,8 +2,10 @@ import styles from "./app.scss";
 import React from "react";
 import { hot } from "react-hot-loader/root";
 import { Switch, Route } from "react-router-dom";
-import Home from "components/containers/home";
+import Documents from "components/containers/documents";
+import Document from "components/containers/document";
 import NotFound from "components/containers/not-found";
+import NewDocument from "components/containers/new-document";
 
 const propTypes = {};
 
@@ -14,7 +16,9 @@ const App = props => {
     <React.Fragment>
       {/* prettier-ignore */}
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/new" component={NewDocument} />
+        <Route exact path="/documents/:page?" component={Documents} />
+        <Route exact path="/document/:documentId" component={Document} />
         <Route component={NotFound} />
       </Switch>
     </React.Fragment>
