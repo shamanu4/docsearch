@@ -80,11 +80,11 @@ async def init_app():
     app['queue'] = asyncio.Queue()
 
     # Configure service routes
-    app.router.add_route('GET', '/status/', handlers.status)
-    app.router.add_route('POST', '/documents/', handlers.new_document)
-    app.router.add_route('GET', '/documents/', handlers.documents)
-    app.router.add_route('GET', '/document/{document_id:\d+}/', handlers.document)
-    app.router.add_route('GET', '/sentence/{sentence_id:\d+}/', handlers.sentence)
+    app.router.add_route('GET', '/api/status/', handlers.status)
+    app.router.add_route('POST', '/api/documents/', handlers.new_document)
+    app.router.add_route('GET', '/api/documents/', handlers.documents)
+    app.router.add_route('GET', '/api/document/{document_id:\d+}/', handlers.document)
+    app.router.add_route('GET', '/api/sentence/{sentence_id:\d+}/', handlers.sentence)
     app['data'] = {}
     app.on_cleanup.append(on_cleanup)
     app.on_startup.append(on_startup)
