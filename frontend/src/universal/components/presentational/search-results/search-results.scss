@@ -1,0 +1,19 @@
+.search-results {
+  flex: 0 0 50%;
+  padding: 10px 10px 10px 0;
+}
+
+.header {
+  text-transform: uppercase;
+  background-color: #ebebeb;
+  padding: 7px 16px;
+  color: #424242;
+  font-weight: 700;
+}
+
+.empty {
+  background-color: $lightgrey;
+  height: 100px;
+  padding-top: 15px;
+  text-align: center;
+}

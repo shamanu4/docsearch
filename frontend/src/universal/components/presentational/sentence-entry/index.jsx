@@ -1,20 +1,24 @@
 import styles from "./sentence-entry.scss";
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import classNames from "classnames";
 
 const propTypes = {};
 
 const defaultProps = {};
 
 export default function SentenceEntry(props) {
+  const sentenceCls = classNames({
+    [styles.sentenceEntry]: true,
+    [styles.sentenceEntrySelected]: props.isSelected
+  });
   return (
-    <Link
-      to={`/sentence/${props.sentence.id}`}
-      className={styles.sentenceEntry}
+    <div
+      className={sentenceCls}
+      onClick={() => props.handleSelect(props.sentence.id)}
     >
       {props.sentence.text}
-    </Link>
+    </div>
   );
 }
 

@@ -7,7 +7,9 @@ import {
 import {
   fetchDocumentSaga,
   watchFetchDocumentSaga,
-  newDocumentSaga
+  newDocumentSaga,
+  fetchSearchResultsSaga,
+  watchFetchSearchResultsSaga
 } from "store/document/sagas";
 
 // This saga is meant to initialize stuff that's very common and assumed to always exist.
@@ -31,6 +33,7 @@ export function* rootSaga(route) {
     watchFetchDocumentsSaga(),
     watchFetchDocumentSaga(),
     newDocumentSaga(),
+    watchFetchSearchResultsSaga(),
     initSaga(route) // must be the last entry
   ]);
 }

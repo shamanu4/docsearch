@@ -4,13 +4,21 @@
   display: block;
   text-decoration: none;
   color: $black;
-  padding: 8px 8px 8px 8px;
+  padding: 8px;
   margin-bottom: 8px;
 
   &:hover {
     text-decoration: none;
     background-color: $lightblue;
     color: #ffffff;
+    cursor: pointer;
+  }
+
+  &-selected {
+    background-color: #ffd552;
+    &:hover {
+      background-color: #44c22b;
+    }
   }
 }
 

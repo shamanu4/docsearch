@@ -5,12 +5,15 @@ import {
   FETCH_DOCUMENT_FAILURE,
   NEW_DOCUMENT_REQUEST,
   NEW_DOCUMENT_SUCCESS,
-  NEW_DOCUMENT_FAILURE
+  NEW_DOCUMENT_FAILURE,
+  FETCH_SEARCH_RESULTS_REQUEST,
+  FETCH_SEARCH_RESULTS_SUCCESS,
+  FETCH_SEARCH_RESULTS_FAILURE
 } from "./constants";
 import { apiGet, apiPost } from "utils/api";
 
 export function* fetchDocumentSaga(action) {
-  const { match, location } = action.payload;
+  const { match } = action.payload;
   const documentId = match.params.documentId || 0;
 
   try {
@@ -63,4 +66,35 @@ export function* newDocumentSaga() {
       });
     }
   }
+}
+
+export function* fetchSearchResultsSaga(action) {
+  const { sentenceId } = action.payload;
+
+  try {
+    const result = yield call(() => apiGet(`/sentence/${sentenceId}/`));
+    if (result.ok) {
+      const payload = {
+        id: result.data.sentence_id,
+        searchText: result.data.sentence_text,
+        searchResults: result.data.search_results
+      };
+      yield put({
+        type: FETCH_SEARCH_RESULTS_SUCCESS,
+        payload: payload,
+        headers: result.headers
+      });
+    } else {
+      throw result.data;
+    }
+  } catch (error) {
+    yield put({
+      type: FETCH_SEARCH_RESULTS_FAILURE,
+      error
+    });
+  }
+}
+
+export function* watchFetchSearchResultsSaga() {
+  yield takeLatest(FETCH_SEARCH_RESULTS_REQUEST, fetchSearchResultsSaga);
 }

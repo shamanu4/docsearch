@@ -1,0 +1,59 @@
+.item {
+  background-color: #f3f3f3;
+  display: flex;
+  flex-flow: row;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+.square {
+  flex: 0 0 100px;
+}
+
+.similarity {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 100;
+  font-size: 14px;
+  border-top: 1px solid #f3f3f3;
+}
+
+.document-id {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 100;
+  font-size: 14px;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.text {
+  padding: 8px;
+  width: 100%;
+  overflow-wrap: break-word;
+  display: flex;
+  align-items: center;
+}
+
+.green {
+  background-color: #aaffaa;
+}
+
+.yellow {
+  background-color: #ccffaa;
+}
+
+.orange {
+  background-color: #ffffaa;
+}
+
+.red {
+  background-color: #ffccaa;
+}
+
+.deep-red {
+  background-color: #ffaaaa;
+}

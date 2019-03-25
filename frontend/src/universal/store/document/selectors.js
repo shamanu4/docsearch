@@ -7,3 +7,10 @@ export const getDocument = createSelector(
   selectDocument,
   substate => (substate ? substate.toJS() : initialState.get("document"))
 );
+
+const selectSearchResults = state => state.getIn(["document", "search"]);
+
+export const getSearchResults = createSelector(
+  selectSearchResults,
+  substate => (substate ? substate.toJS() : initialState.get("search"))
+);

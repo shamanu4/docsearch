@@ -12,7 +12,11 @@ export default function SentenceList(props) {
     return props.sentences.map(sentence => {
       return (
         <li className={styles.item} key={sentence.id}>
-          <SentenceEntry sentence={sentence} />
+          <SentenceEntry
+            sentence={sentence}
+            isSelected={props.selectedSentenceId === sentence.id}
+            handleSelect={props.handleSentenceSelect}
+          />
         </li>
       );
     });
@@ -20,6 +24,7 @@ export default function SentenceList(props) {
 
   return (
     <div className={styles.sentenceList}>
+      <p className={styles.header}>Sentence list in the document:</p>
       {props.sentences && <ul className={styles.list}>{renderSentence()}</ul>}
     </div>
   );
