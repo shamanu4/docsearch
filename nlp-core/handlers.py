@@ -180,7 +180,5 @@ async def sentence(request):
         "success": True,
         "sentence_id": sentence_id,
         "sentence_text": sentence_text,
-        "similarities": similarities,
-        "sentence_ids": sentence_ids,
         "search_results": [dict(item) for item in res]
     })
