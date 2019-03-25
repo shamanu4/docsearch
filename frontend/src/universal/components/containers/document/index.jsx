@@ -41,6 +41,14 @@ export default class Document extends React.Component {
     this.handleSentenceSelect = this.handleSentenceSelect.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.location !== this.props.location) {
+      this.props.clearDocumentAction();
+      this.props.clearSearchAction();
+      this.props.fetchDocumentAction(this.props.match, this.props.location);
+    }
+  }
+
   componentDidMount() {
     this.props.fetchDocumentAction(this.props.match, this.props.location);
   }

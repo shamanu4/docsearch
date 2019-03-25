@@ -2,6 +2,7 @@ import styles from "./search-result-item.scss";
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { Link } from "react-router-dom";
 
 const propTypes = {};
 
@@ -27,7 +28,11 @@ export default function SearchResultItem(props) {
   return (
     <div className={styles.item}>
       <div className={squareCls}>
-        <div className={styles.documentId}>DOC #{props.result.document_id}</div>
+        <Link to={`/document/${props.result.document_id}/`}>
+          <div className={styles.documentId}>
+            DOC #{props.result.document_id}
+          </div>
+        </Link>
         <div className={styles.similarity}>
           {renderSimilarity(props.result.similarity)}%
         </div>
