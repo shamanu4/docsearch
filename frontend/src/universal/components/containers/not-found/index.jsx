@@ -7,7 +7,7 @@ const propTypes = {};
 const defaultProps = {};
 
 export default function NotFound(props) {
-  return <Redirect to="/" />;
+  return <Redirect to="/documents/" />;
 }
 
 NotFound.propTypes = propTypes;

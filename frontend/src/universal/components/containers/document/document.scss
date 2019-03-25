@@ -1,0 +1,5 @@
+.document {
+  padding-top: 16px;
+  @extend %container;
+  max-width: 1096px;
+}

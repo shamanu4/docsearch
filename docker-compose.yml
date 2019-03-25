@@ -116,37 +116,28 @@ services:
 #          cpus: "4"
 #          memory: 16G
 #
-#  nginx:
-#    image: registry.liveedu.tv/web/nginx:alpha
-#    environment:
-#      RESOLVER_VALID: 5s
-#    volumes:
-#      - type: bind
-#        source: /srv/production/volumes/static
-#        target: /srv/static
-#      - type: bind
-#        source: /srv/production/volumes/assets
-#        target: /srv/assets
-#    ports:
-#      - target: 80
-#        published: 80
-#        protocol: tcp
-#        mode: host
-#      - target: 443
-#        published: 443
-#        protocol: tcp
-#        mode: host
-#    depends_on:
-#      - web-old
-#      - web-ng
-#      - xmpp
-#      - logs
-#      - logspout
-#    deploy:
-#      mode: global
-#      placement:
-#        constraints:
-#        - node.labels.web_role == master
-#      restart_policy:
-#        condition: any
-#        delay: 1s
+
+  nginx:
+    image: nginx:latest
+    environment:
+      RESOLVER_VALID: 5s
+    volumes:
+      - type: bind
+        source: ./volumes/assets
+        target: /srv/assets
+      - type: bind
+        source: ./nginx/nginx.conf
+        target: /etc/nginx/nginx.conf
+    ports:
+      - target: 8000
+        published: 8000
+        protocol: tcp
+        mode: host
+    deploy:
+      mode: global
+      placement:
+        constraints:
+        - node.labels.web_role == master
+      restart_policy:
+        condition: any
+        delay: 1s

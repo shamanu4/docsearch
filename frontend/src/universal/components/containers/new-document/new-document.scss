@@ -1,0 +1,45 @@
+.new-document {
+  padding-top: 16px;
+  @extend %container;
+  max-width: 1096px;
+}
+
+.textarea {
+  flex: 1;
+  resize: none;
+  height: 75vh;
+  width: 100%;
+  color: #424242;
+  border: 1px solid #e5e5e5;
+  background-color: #fff;
+  font-size: 12px;
+  border-radius: 2px;
+  padding: 6px 10px;
+}
+
+.cta {
+  min-width: 180px;
+  text-align: center;
+  border: 0;
+  border-radius: 2px;
+  background-color: $blue;
+  font-size: 14px;
+  color: #fbfbfb;
+  font-weight: 600;
+  box-shadow: 0px 2px 1px rgba(31, 98, 143, 1);
+  padding: 16px 16px;
+  cursor: pointer;
+  margin-top: 8px;
+
+  &:hover {
+    text-decoration: none;
+    background-color: $blue;
+    color: #fdfdfd;
+  }
+
+  &:focus {
+    outline: 0;
+    background-color: $blue;
+    color: #fdfdfd;
+  }
+}
