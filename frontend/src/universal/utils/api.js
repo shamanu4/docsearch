@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 
-const apiUrl = process.env.API_URL ? process.env.API_URL : "/api/";
+const apiUrl = process.env.API_URL ? process.env.API_URL : "/api";
 
 export function fetchJson(url) {
   const options = {
