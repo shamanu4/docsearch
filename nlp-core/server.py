@@ -2,16 +2,16 @@ import concurrent.futures
 import hnswlib
 import logging
 import os
-import config
 
 import asyncio
 import asyncpg
 from aiohttp import web
 from gensim.models import KeyedVectors
 
+import config
+import handlers
 from middleware import error_middleware
 from tasks import document_parser
-import handlers
 
 
 async def on_startup(app):
@@ -83,8 +83,8 @@ async def init_app():
     app.router.add_route('GET', '/api/status/', handlers.status)
     app.router.add_route('POST', '/api/documents/', handlers.new_document)
     app.router.add_route('GET', '/api/documents/', handlers.documents)
-    app.router.add_route('GET', '/api/document/{document_id:\d+}/', handlers.document)
-    app.router.add_route('GET', '/api/sentence/{sentence_id:\d+}/', handlers.sentence)
+    app.router.add_route('GET', r'/api/document/{document_id:\d+}/', handlers.document)
+    app.router.add_route('GET', r'/api/sentence/{sentence_id:\d+}/', handlers.sentence)
     app['data'] = {}
     app.on_cleanup.append(on_cleanup)
     app.on_startup.append(on_startup)

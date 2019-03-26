@@ -1,9 +1,9 @@
 import nltk
+import numpy as np
 from aiohttp import web
 from aiohttp.web_exceptions import HTTPNotFound, HTTPBadRequest
 
 import config
-import numpy as np
 
 
 async def status(request):
@@ -35,7 +35,7 @@ async def new_document(request):
         for i, s in enumerate(sentences):
             async with connection.transaction():
                 sql = """
-                  INSERT INTO sentence (id, document_id, ordering, text, indexed) 
+                  INSERT INTO sentence (id, document_id, ordering, text, indexed)
                   VALUES (DEFAULT, $1, $2, $3, False) RETURNING id;
                 """
                 sentence_id = await connection.fetchval(sql, document_id, i, s)
@@ -75,12 +75,12 @@ async def documents(request):
 
         async with connection.transaction():
             sql = """
-              SELECT 
-                d.id, 
+              SELECT
+                d.id,
                 CASE
                   WHEN LENGTH(s.text) > 50 THEN SUBSTRING(s.text, 1, 50) || '...'
                   ELSE s.text
-                END AS title 
+                END AS title
               FROM document d JOIN sentence s ON s.document_id = d.id
               WHERE s.ordering = 0
               LIMIT $1 OFFSET $2
@@ -103,7 +103,7 @@ async def document(request):
     async with pool.acquire() as connection:
         async with connection.transaction():
             sql = """
-              SELECT 
+              SELECT
                 s.id, s.text, s.indexed
               FROM document d JOIN sentence s ON s.document_id = d.id
               WHERE d.id = $1
@@ -128,7 +128,7 @@ async def sentence(request):
     async with pool.acquire() as connection:
         async with connection.transaction():
             sql = """
-              SELECT 
+              SELECT
                 s.id, s.text, s.indexed
               FROM sentence s
               WHERE s.id = $1
@@ -165,9 +165,9 @@ async def sentence(request):
 
         async with connection.transaction():
             sql = """
-              SELECT 
-                r.similarity, s.document_id, s.id, s.text 
-              FROM 
+              SELECT
+                r.similarity, s.document_id, s.id, s.text
+              FROM
                 sentence s JOIN (
                   SELECT unnest($1::int[]) as sentence_id, unnest($2::float[]) as similarity
                 ) r

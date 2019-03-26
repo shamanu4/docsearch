@@ -1,9 +1,8 @@
-import asyncio
 import nltk
+import numpy as np
 
 import config
 from config import logging
-import numpy as np
 
 
 async def document_parser(app, queue):

@@ -1,6 +1,7 @@
+import logging
 import os
 import sys
-import logging
+
 from nltk.corpus import stopwords
 
 MAX_ITEMS_PER_PAGE = 100
