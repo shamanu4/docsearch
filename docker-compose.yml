@@ -77,8 +77,8 @@ services:
         source: ./nginx/nginx.conf
         target: /etc/nginx/nginx.conf
     ports:
-      - target: 8000
-        published: 8000
+      - target: 80
+        published: 80
         protocol: tcp
         mode: host
     deploy:

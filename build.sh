@@ -1,5 +1,6 @@
 #!/bin/sh
 cd "$(dirname "$0")"
+mkdir -p ./volumes/{assets,db}
 
 # Build frontend and extract bundles from the image.
 # We will not run SSR but still build in docker to avoid installing node on the host 
