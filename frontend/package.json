@@ -5,11 +5,7 @@
   "browserslist": "last 1 versions, > 0.2%, not dead",
   "scripts": {
     "build:client:dev": "webpack --config webpack.client.config.js --mode development",
-    "build:server:dev": "webpack --config webpack.server.config.js --mode development",
     "build:client:prod": "webpack --config webpack.client.config.js --mode production",
-    "build:server:prod": "webpack --config webpack.server.config.js --mode production",
-    "server:dev": "npm run build:client:dev && npm run build:server:dev && node dist/server/server.js",
-    "server:prod": "npm run build:client:prod && npm run build:server:prod && node dist/server/server.js",
     "webpack:bundle:analyzer:dev": "NODE_ENV=analyse npm run build:client:dev",
     "webpack:bundle:analyzer:prod": "NODE_ENV=analyse npm run build:client:prod",
     "start": "NODE_ENV=hmr webpack-dev-server --config webpack.client.config.js --mode development --port 3000",
