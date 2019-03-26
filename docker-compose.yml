@@ -3,16 +3,8 @@ version: "3.5"
 # Used placement constraints:
 #  - node.role == manager
 #  - node.labels.db_role == master
-#  - node.labels.redis_role == master
-#  - node.labels.elasticsearch_role == master
-#  - node.labels.xmpp_role == master
-#  - node.labels.mediaserver_role == master
-#  - node.labels.web_role == master
+#  - node.labels.backend_role == master
 #  - node.labels.web_role == worker
-#  - node.labels.celery_role == master
-#  - node.labels.celery_role == worker
-#  - node.labels.parity_role == master
-#  - node.labels.sentry_role == master
 # example: sudo docker node update --label-add role=db <NODE>
 
 networks:
@@ -34,8 +26,6 @@ services:
       - type: bind
         source: ./db/init.sql
         target: /docker-entrypoint-initdb.d/init.sql
-    ports:
-      - 127.0.0.1:5432:5432
     deploy:
       replicas: 1
       restart_policy:
@@ -45,77 +35,35 @@ services:
       placement:
         constraints:
           - node.labels.db_role == master
-      resources:
-        limits:
-          cpus: "2"
-          memory: 16G
-#
-#  web-ng:
-#    image: registry.liveedu.tv/web/liveedu:alpha
-#    env_file:
-#      - ./web-ng.env
-#    environment:
-#      ELASTICSEARCH_HOST: elasticsearch5
-#      NEW_RELIC_ENVIRONMENT: new_production.web
-#    command: newrelic-admin run-program gunicorn liveedu.wsgi:application -c /srv/web/gunicorn.conf.py
-#    depends_on:
-#      - db
-#      - redis
-#      - elasticsearch5
-#      - logs
-#      - logspout
-#    volumes:
-#      - type: bind
-#        source: /srv/production/volumes/keys
-#        target: /srv/keys
-#    deploy:
-#      replicas: 3
-#      endpoint_mode: dnsrr
-#      restart_policy:
-#        condition: any
-#        delay: 1s
-#        window: 5s
-#      update_config:
-#        parallelism: 1
-#        delay: 2s
-#        failure_action: rollback
-#      placement:
-#        constraints:
-#        - node.labels.web_role == master
-#      resources:
-#        limits:
-#          cpus: "4"
-#          memory: 16G
-#
-#  spa-ssr:
-#    image: registry.liveedu.tv/web/liveedu-frontend:alpha
-#    environment:
-#      PORT: 3000
-#      NODE_ENV: production
-#      API_URL: https://www.education-ecosystem.com/api/v3
-#    volumes:
-#      - type: bind
-#        source: /srv/production/volumes/assets
-#        target: /srv/nginx_assets
-#    deploy:
-#      replicas: 3
-#      endpoint_mode: dnsrr
-#      restart_policy:
-#        condition: any
-#        delay: 1s
-#        window: 5s
-#      update_config:
-#        parallelism: 1
-#        delay: 2s
-#        failure_action: rollback
-#      placement:
-#        constraints:
-#        - node.labels.web_role == master
-#      resources:
-#        limits:
-#          cpus: "4"
-#          memory: 16G
-#
+
+  backend:
+    image: docsearch-backend:latest
+    environment:
+      DB_HOST: db
+      DB_USER: docsearch
+      DB_NAME: docsearchdb
+      DB_PASSWORD: haiRei3aiqu
+    command: python server.py
+    depends_on:
+      - db
+    volumes:
+      - type: bind
+        source: ./nlp-core/data
+        target: /srv/app/data/
+    deploy:
+      replicas: 1
+      endpoint_mode: dnsrr
+      restart_policy:
+        condition: any
+        delay: 1s
+        window: 5s
+      update_config:
+        parallelism: 1
+        delay: 2s
+        failure_action: rollback
+      placement:
+        constraints:
+        - node.labels.web_role == master
 
   nginx:
     image: nginx:latest
@@ -137,7 +85,7 @@ services:
       mode: global
       placement:
         constraints:
-        - node.labels.web_role == master
+        - node.labels.nginx_role == master
       restart_policy:
         condition: any
         delay: 1s

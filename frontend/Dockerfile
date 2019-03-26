@@ -4,6 +4,4 @@ FROM node:10 as builder
 
 WORKDIR /srv/app
 COPY . /srv/app/
-RUN yarn install && yarn build:client:prod && yarn build:server:prod
-EXPOSE 3000
-ENTRYPOINT [ "/bin/sh", "entrypoint.sh" ]
+RUN yarn install && yarn build:client:prod
