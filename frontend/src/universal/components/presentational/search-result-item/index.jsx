@@ -10,7 +10,7 @@ const defaultProps = {};
 
 export default function SearchResultItem(props) {
   const renderSimilarity = function(s) {
-    return parseInt(s * 10000) / 100;
+    return Math.round(s * 10000) / 100;
   };
 
   const squareCls = classNames({
