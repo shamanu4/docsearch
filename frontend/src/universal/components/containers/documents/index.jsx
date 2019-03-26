@@ -1,5 +1,6 @@
 import styles from "./documents.scss";
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Layout from "components/containers/app/layout";
 import { connect } from "react-redux";
@@ -37,11 +38,25 @@ export default class Documents extends React.Component {
   componentDidMount() {
     this.props.fetchDocumentsAction(this.props.match, this.props.location);
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.location !== this.props.location) {
+      this.props.fetchDocumentsAction(this.props.match, this.props.location);
+    }
+  }
+
   render() {
     return (
       <Layout title="Document list">
         <div className={styles.documents}>
           <DocumentList documents={this.props.documents.items} />
+          {this.props.documents.numPages > 1 && this.props.documents.page == 1 && (
+            <div>
+              Pagination is not implemented yet, but you can manually navigate
+              through pages via url param e.g. &nbsp;
+              <Link to="/documents/2/">/documents/2/</Link>
+            </div>
+          )}
         </div>
       </Layout>
     );
