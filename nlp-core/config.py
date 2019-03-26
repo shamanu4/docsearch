@@ -5,7 +5,7 @@ from nltk.corpus import stopwords
 
 MAX_ITEMS_PER_PAGE = 100
 DEFAULT_ITEMS_PER_PAGE = 20
-SEARCH_RESULT_COUNT = 5
+SEARCH_RESULT_COUNT = 10
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 WORD2VEC_MODEL_WORDS_LIMIT = 500000
 
