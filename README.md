@@ -4,8 +4,12 @@
 
    `git clone https://github.com/shamanu4/docsearch && cd docsearch`
 
-2. Setup docker swarm:
+2. Setup docker or docker swarm:
    ```
+   docker-compose up -d   
+   
+   OR
+
    docker swarm init --advertise-addr <SERVER_IP>
    docker node update --label-add db_role=master <NODE_ID>
    docker node update --label-add web_role=master <NODE_ID>
