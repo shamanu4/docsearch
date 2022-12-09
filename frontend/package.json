@@ -17,7 +17,7 @@
     "connected-react-router": "^6.2.2",
     "emotion": "^10.0.9",
     "emotion-server": "^10.0.9",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-http-context": "^1.2.0",
     "focus-trap-react": "^5.0.1",
     "history": "^4.9.0",
